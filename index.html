@@ -14,8 +14,9 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/main-styles.css" rel="stylesheet" />
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
-    <body id="page-top">
+    <body id="page-top" x-data="{ activeSection: 'home' }">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -25,17 +26,21 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger active" :class="{ 'active': activeSection === 'home' }" @click.prevent="activeSection = 'home'">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" :class="{ 'active': activeSection === 'talks' }" @click.prevent="activeSection = 'talks'">MY TALKS</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="resume.html">RESUME</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger disabled" href="#">BLOG</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="talks.html">MY TALKS</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger disabled" href="#">PODCAST</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger disabled" href="resume.html">BLOG</a></li>
                 </ul>
             </div>
         </nav>
         <!-- Page Content-->
         <div class="container-fluid p-0">
             <!-- About-->
-            <section class="resume-section" id="about">
+            <section class="resume-section" id="about" x-show="activeSection === 'home'">
                 <div class="resume-section-content">
                     <h1 class="mb-0">
                         Ziad Mansour Mohamed
@@ -56,6 +61,12 @@
                         <a class="social-icon" href="https://linkedin.com/in/ziad-mansour"><i class="fab fa-linkedin-in"></i></a>
                         <a class="social-icon" href="https://instagram.com/ziad_m_404"><i class="fab fa-instagram"></i></a>
                     </div>
+                </div>
+            </section>
+            <!-- My Talks-->
+            <section class="resume-section" id="my-talks" x-show="activeSection === 'talks'">
+                <div class="resume-section-content">
+                    <h1>My Talks</h1>
                 </div>
             </section>
             <hr class="m-0" />
