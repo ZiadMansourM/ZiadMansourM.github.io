@@ -21,7 +21,7 @@
             }
         </style>
     </head>
-    <body id="page-top" x-data="{ activeSection: 'home' }">
+    <body id="page-top" x-data="{ activeSection: getActiveSection() }" x-init="init()">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
@@ -32,10 +32,10 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger active" :class="{ 'active': activeSection === 'home' }" @click.prevent="activeSection = 'home'">HOME</a>
+                        <a class="nav-link js-scroll-trigger active" :class="{ 'active': activeSection === 'home' }" @click.prevent="activeSection = 'home'; localStorage.setItem('activeSection', 'home')">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" :class="{ 'active': activeSection === 'talks' }" @click.prevent="activeSection = 'talks'">MY TALKS</a>
+                        <a class="nav-link js-scroll-trigger" :class="{ 'active': activeSection === 'talks' }" @click.prevent="activeSection = 'talks'; localStorage.setItem('activeSection', 'talks')">MY TALKS</a>
                     </li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="resume.html">RESUME</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger disabled" href="resume.html">BLOG</a></li>
@@ -102,5 +102,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="assets/js/scripts.js"></script>
+        <script>
+            function getActiveSection() {
+                return localStorage.getItem('activeSection') || 'home';
+            }
+            
+            function init() {
+                window.addEventListener('beforeunload', () => {
+                    localStorage.setItem('activeSection', this.activeSection);
+                });
+            }
+        </script>
     </body>
 </html>
